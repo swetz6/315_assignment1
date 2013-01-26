@@ -1,24 +1,29 @@
 #include "userInterfaceFunctions.h"
-//#include <sstream>
+
 
 
 //this function creates a new student and adds them to the student list.
 student addNewStudent(int id, string firstName, string lastName, string major,studentList *ls){
-    student newEnrolee(id,firstName,lastName,major);
+    student newEnrolee(id, firstName, lastName, major);
     ls->addStudent(newEnrolee);
     return newEnrolee;
 }
 
 //addAPayment adds a payment to a students bill
-void addAPayment(boost::gregorian::date d, float amount, int studentID,studentList *ls){
-    feePaymentEntry newPayment(d,amount,studentID);
+void addAPayment(boost::gregorian::date d, float amount, int studentID, studentList *ls){
+    feePaymentEntry newPayment(d, amount, studentID);
     ls->addPayment(newPayment);
 }
 
 //addACharge adds either a fee or fine to a students bill
-void addACharge(boost::gregorian::date d, float amount, int studentID, string type, int departmentID, studentList *ls){
-    feePaymentEntry newPayment(d,amount,studentID,type,departmentID);
+void addACharge(boost::gregorian::date d, float amount, int studentID, string type, int departmentID, studentList *ls, vector<department> &ds){
+    feePaymentEntry newPayment(d, amount, studentID, type, departmentID);
     ls->addPayment(newPayment);
+    department depToUpdate = departmentFromID(departmentID, ds);
+    //depToUpdate.printDepartmentInfo();
+    student studentToAdd = findByStudentID(studentID, ls);
+    depToUpdate.updateDepartment(studentToAdd, newPayment);
+    depToUpdate.printDepartmentList();
 }
 
 //findByStudentID is a function that takes a studentID and returns the actual
@@ -31,7 +36,8 @@ student findByStudentID(int studentID, studentList *ls){
 //given a studentID and a list of students, print out that students statement
 void printStudentStatement(int studentID, studentList *ls){
     student studentToPrint = findByStudentID(studentID, ls);
-    cout << studentToPrint.getFirstName() << " " << studentToPrint.getLastName() << " " << 
+    cout << studentToPrint.getFirstName() << " " << 
+            studentToPrint.getLastName() << " " << 
             studentToPrint.getMajor() << '\n';
     studentToPrint.printBill();
 }
@@ -79,4 +85,14 @@ boost::gregorian::date makeDateFromString(string s){
     boost::gregorian::date newDate(makeDate(month,day,year));
     return newDate;
 }
+
+//***** NEED TO FIX *****
+department departmentFromID(int departmentID, vector<department> ds){
+    for(int i = 0; i<ds.size(); i++){
+        if(departmentID == ds[i].getDepartmentID()){
+            return ds[i];
+        }
+    }
+}
+
 

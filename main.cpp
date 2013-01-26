@@ -14,15 +14,23 @@ using namespace std;
 
 int main(int argc, char** argv) {
     //create the list of students
+    vector<department> listOfDepartments;
     boost::gregorian::date d , dd;
     d = makeDateFromString("1/25/2011");
     dd = makeDateFromString("7/27/2011");
+    department cs = createADepartment("1024 Computer Science", listOfDepartments);
+    //department is not being added to the department list
+    //might be because its by value and not reference
+    //cout << "number dep: " << listOfDepartments.size();
     studentList *universityList = new studentList();
     student steve = addNewStudent(14,"steve","glagola","econ",universityList);
-    addAPayment(d,147.15,steve.getStudentID(),universityList);
-    addAPayment(dd,20.00,steve.getStudentID(),universityList);
+    //addAPayment(d,147.15,steve.getStudentID(),universityList);
+    //addAPayment(dd,20.00,steve.getStudentID(),universityList);
+    addACharge(d,147.25,steve.getStudentID(),"fee",1024,universityList,listOfDepartments);
+    //department cs = createADepartment("1024 Computer Science");
+    //cs.printDepartmentInfo();
     //printOutDepartmentList(universityList);
-    printStudentStatement(steve.getStudentID(),universityList);
+    //printStudentStatement(steve.getStudentID(),universityList);
     return 0;
 }
 /*

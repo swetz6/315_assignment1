@@ -27,23 +27,22 @@ class feePaymentEntry {
     int departmentID;
 public:
     boost::gregorian::date getDate() {return d;}
-    float getAmount(){return amount;}
-    int getStudentID(){return studentID;}
-    std::string getType(){return type;}
-    int getDepartmentID(){return departmentID;}
+    float getAmount() {return amount;}
+    int getStudentID() {return studentID;}
+    std::string getType() {return type;}
+    int getDepartmentID() {return departmentID;}
     
     //The constructor for a payment entry. The department ID will always be 00000
     //to identify a payment. 
     feePaymentEntry(boost::gregorian::date e, float amt, int student)
-            :d(e),amount(amt),studentID(student){
+            :d(e), amount(amt), studentID(student) {
                 departmentID=00000;
                 type="payment";
     }
     
     //The constructor for a fee/fine entry. 
     feePaymentEntry(boost::gregorian::date e, float amt, int student, std::string fineType, int depID)
-            :d(e),amount(-amt),studentID(student),type(fineType),departmentID(depID){}
-    //void updateBill(feePaymentEntry);
+            :d(e), amount(-amt), studentID(student), type(fineType), departmentID(depID) {}
 };
 
 

@@ -9,10 +9,15 @@
 using namespace std;
 
 string getOperationDesired(string);
-void doDesiredOperation(string,studentList*);
+void doDesiredOperation(string, studentList*, vector<department> &);
 string restOfInput(string);
-student createAStudent(string,studentList*);
-void addAFee(string, studentList*);
+student createAStudent(string, studentList*);
+void addAFee(string, studentList*, vector<department> &);
+void processAPayment(string, studentList*);
+void printStudentReport(string, studentList*);
+department createADepartment(string, vector<department> &);
+void addToDepartmentList(department, vector<department> &);
+//department departmentFromID(int, vector<department>);
 
 
 

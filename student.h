@@ -26,7 +26,7 @@ class student {
 public:
         //constructor to define a new student
 	student(int stdID, std::string firstN, std::string lastN, std::string mj)
-		:studentID(stdID),firstName(firstN),lastName(lastN),collegeMajor(mj) {
+		:studentID(stdID), firstName(firstN), lastName(lastN), collegeMajor(mj) {
                     studentBill = std::vector<feePaymentEntry>();
                 }
 	student();
@@ -34,19 +34,19 @@ public:
         boost::gregorian::date firstEntryDate() {return studentBill[0].getDate();}
         
         //get a students id number
-	int getStudentID(){return studentID;}
+	int getStudentID() {return studentID;}
         
         //get a students first name
-	std::string getFirstName(){return firstName;}
+	std::string getFirstName() {return firstName;}
         
         //get a students last name
-	std::string getLastName(){return lastName;}
+	std::string getLastName() {return lastName;}
         
         //get a students major
-	std::string getMajor(){return collegeMajor;}
+	std::string getMajor() {return collegeMajor;}
         
         //add a new payment/fee entry to a student's bill
-        void addEntry(feePaymentEntry entry){studentBill.push_back(entry);}
+        void addEntry(feePaymentEntry entry) {studentBill.push_back(entry);}
         
         //getTotal finds the total of the billing statement of a particular student
         float getTotal();
@@ -54,9 +54,18 @@ public:
         //printBill prints the fees and payments of a particular student
         void printBill();
         
-        int numberEntries(){return studentBill.size();}
-        float calcAttempt();
+        int numberEntries() {return studentBill.size();}
+        
+        //calculate the amount owed with interest. Calculates from the first
+        //entry to the last.
+        float calcAmountOwed();
+        
+        //find if a particular entry is in a particular month. This function is
+        //checking if an entry is in the range from the first of a month to the end
         bool entryInMonth(feePaymentEntry, boost::gregorian::date);
+        
+        //This function takes in the current month, and returns the date of the
+        //start of the next month.
         boost::gregorian::date startOfNextMonth(boost::gregorian::date);
 };
 

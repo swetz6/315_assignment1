@@ -21,7 +21,7 @@ public:
     listOfStudents = std::vector<student>();
 }
     //addStudent takes a student and adds them to the list of students.
-    void addStudent(student newStudent){listOfStudents.push_back(newStudent);}
+    void addStudent(student newStudent) {listOfStudents.push_back(newStudent);}
     //isStudent determines by last name if a person is a student or not
     bool isStudent(std::string lastName);
     
@@ -38,6 +38,7 @@ public:
     
     void printOutStudents();
     void printOutATotal(int studentID);
+    void addStudentWithCharge(student newStudent, feePaymentEntry entry);
     
     
 };
