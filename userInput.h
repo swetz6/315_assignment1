@@ -17,6 +17,8 @@ void processAPayment(string, studentList*);
 void printStudentReport(string, studentList*);
 department createADepartment(string, vector<department> &);
 void addToDepartmentList(department, vector<department> &);
+void printDepartmentReport(string, vector<department> &);
+void printMajorReport(string, studentList*);
 //department departmentFromID(int, vector<department>);
 
 

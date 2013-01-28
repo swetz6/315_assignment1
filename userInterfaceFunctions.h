@@ -21,5 +21,6 @@ boost::gregorian::date makeDate(int, int, int);
 boost::gregorian::date makeDateFromString(string);
 int makeIntFromString(string);
 department departmentFromID(int, vector<department>);
+float makeFloatFromString(string s);
 
 

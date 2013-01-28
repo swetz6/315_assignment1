@@ -24,6 +24,7 @@ public:
     void addStudent(student newStudent) {listOfStudents.push_back(newStudent);}
     //isStudent determines by last name if a person is a student or not
     bool isStudent(std::string lastName);
+    void studentsInMajor(std::string major, std::vector<student> &ms);
     
     //this function is for using a studentID number to properly identify the student
     //in the list of students. We return the index of the location of the student

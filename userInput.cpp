@@ -34,12 +34,16 @@ void doDesiredOperation(string s, studentList *ls, vector<department> &ds){
     else if(operation.compare("PS")==0){
         printStudentReport(remainingInstructions, ls);
     }
-    else if(operation.compare("PD")==0)//print report for department
-        return;
-    else if(operation.compare("PM")==0)//print a major report
-        return;
-    else 
-        return;
+    else if(operation.compare("PD")==0){
+        printDepartmentReport(remainingInstructions, ds);
+    }
+    else if(operation.compare("PM")==0){
+        printMajorReport(remainingInstructions, ls);
+    }
+    else {
+        cout << "Invalid Command, please make sure to capitalize the command.";
+    }
+        
 }
 
 //this function will return a student when the user enters an 'S' as the operation desired
@@ -57,10 +61,19 @@ void addAFee(string input, studentList* ls, vector<department> &ds){
     int studentID,departmentID;
     float amount;
     boost::gregorian::date d;
-    string type, date;
+    string type, date, stuID, depID, amt;
     istringstream is(input);
-    is >> studentID >> departmentID >> amount >> date >> type;
+    getline(is, stuID, ' ');
+    getline(is, depID, ' ');
+    getline(is, amt, ' ');
+    getline(is, date, ' ');
+    getline(is, type, '\n');
+    studentID = makeIntFromString(stuID);
+    departmentID = makeIntFromString(depID);
+    amount = makeFloatFromString(amt);
+    //is >> studentID >> departmentID >> amount >> date >> type;
     d = makeDateFromString(date);
+    //cout << "Is it a float? " << amount; 
     addACharge(d, amount, studentID, type, departmentID, ls, ds);
     return;
 }
@@ -102,12 +115,22 @@ void addToDepartmentList(department d, vector<department> &ds){
     ds.push_back(d);
 }
 
-//Takes a departmentID and the list of all departments and returns
-//the department associated with the ID
-/*department departmentFromID(int departmentID, vector<department> ds){
-    for(int i = 0; i<ds.size(); i++){
-        if(departmentID == ds[i].getDepartmentID()){
-            return ds[i];
-        }
+void printDepartmentReport(string input, vector<department> &ds){
+    int departmentID;
+    istringstream is(input);
+    is >> departmentID;
+    department depToPrint = departmentFromID(departmentID, ds);
+    depToPrint.printDepartmentList();
+}
+
+void printMajorReport(string input, studentList* ls){
+    string major;
+    vector<student> studentsInMajor;
+    istringstream is(input);
+    is >> major;
+    ls->studentsInMajor(major, studentsInMajor);
+    cout << "Students in the " << major << " major" << '\n';
+    for (int i = 0; i < studentsInMajor.size(); i++){
+        studentsInMajor[i].printBill();
     }
-}*/
+}

@@ -23,7 +23,7 @@ void addACharge(boost::gregorian::date d, float amount, int studentID, string ty
     //depToUpdate.printDepartmentInfo();
     student studentToAdd = findByStudentID(studentID, ls);
     depToUpdate.updateDepartment(studentToAdd, newPayment);
-    depToUpdate.printDepartmentList();
+    //depToUpdate.printDepartmentList();
 }
 
 //findByStudentID is a function that takes a studentID and returns the actual
@@ -70,6 +70,13 @@ int makeIntFromString(string s){
     return returnValue;
 }
 
+float makeFloatFromString(string s){
+    float returnValue;
+    istringstream is(s);
+    is >> returnValue;
+    return returnValue;
+}
+
 //function takes in a string representing a date in the form DD/MM/YYYY
 //it returns a date represented by the boost class gregorian date
 boost::gregorian::date makeDateFromString(string s){
@@ -86,7 +93,6 @@ boost::gregorian::date makeDateFromString(string s){
     return newDate;
 }
 
-//***** NEED TO FIX *****
 department departmentFromID(int departmentID, vector<department> ds){
     for(int i = 0; i<ds.size(); i++){
         if(departmentID == ds[i].getDepartmentID()){

@@ -2,13 +2,22 @@
 
 
 bool studentList::isStudent(std::string lastName){
-        for(int i=0; i<listOfStudents.size(); i++){
+        for(int i = 0; i<listOfStudents.size(); i++){
             std::string nameToCompare = listOfStudents[i].getLastName();
             if (lastName.compare(nameToCompare)==0) { 
                 return true;
             }
         }
         return false;
+}
+
+void studentList::studentsInMajor(std::string major, std::vector<student> &ms){
+    for(int i = 0; i<listOfStudents.size(); i++){
+        std::string majorToCompare = listOfStudents[i].getMajor();
+        if (majorToCompare.compare(major)==0){
+            ms.push_back(listOfStudents[i]);
+        }
+    }
 }
     
     //this function is for using a studentID number to properly identify the student
@@ -40,7 +49,9 @@ student studentList::findAStudent(int studentID){
         //else{
           //  return NULL;
         //}
-} 
+}
+
+
     
 void studentList::printOutStudents(){
         for(int i=0; i<listOfStudents.size(); i++){

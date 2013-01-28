@@ -12,11 +12,23 @@ float student::getTotal() {
 //Print a students bill, This function prints each entry type of a students bill,
 //the amount of that entry, and finally the total amount owed with interest.
 void student::printBill() {
-    for (int i = 0; i < studentBill.size(); i++){
-        std::cout << "Charge Type: " << studentBill[i].getType() << "\t" <<
-        studentBill[i].getAmount() << '\n';
+    if (studentBill.size()==0){
+        std::cout << "Student has no Balance. " << '\n'; 
     }
-    std::cout << "Total is: " << student::calcAmountOwed();
+    else {
+        for (int i = 0; i < studentBill.size(); i++){
+                std::cout << "Charge Type: " << studentBill[i].getType() << "\t" <<
+                studentBill[i].getAmount() << '\n';
+        }
+        float amountOwed = student::calcAmountOwed();
+        if (amountOwed < 0.00) {
+            amountOwed = amountOwed * -1.0;
+            std::cout << "Total is: (" << amountOwed << ")" << '\n';  
+        }
+        else {
+            std::cout << "Total is: " << student::calcAmountOwed() << '\n';
+        }
+    }
 }
 
 //given a date and entry of a students bill, check if this entry is in the same
